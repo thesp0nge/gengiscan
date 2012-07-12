@@ -13,9 +13,8 @@ To install gengiscan gem
 
 Using gengiscan it's easy:
 
-  require 'gengiscan'
-
-  puts Gengiscan.new.detect("http://www.targetcms.com")[:generator]
+    require 'gengiscan'
+    puts Gengiscan.new.detect("http://www.targetcms.com")[:generator]
 
 ## Contributing
 
