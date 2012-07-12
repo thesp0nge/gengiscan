@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+require 'gengiscan'
+
+
+puts Gengiscan::Engine.new("http://wordpress.org/news/").detect
+

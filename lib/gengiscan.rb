@@ -1,5 +1,5 @@
-require "gengiscan/version"
 
-module Gengiscan
-  # Your code goes here...
-end
+require "gengiscan/version"
+require "gengiscan/engine"
+
+
