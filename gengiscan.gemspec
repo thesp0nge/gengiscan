@@ -4,8 +4,8 @@ require File.expand_path('../lib/gengiscan/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Paolo Perego"]
   gem.email         = ["thesp0nge@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{gengiscan is a CMS fingerprinting tool using Generator meta tag and Server HTTP response header to fingerpring a CMS used by a website}
+  gem.summary       = %q{gengiscan is a CMS fingerprinting tool using Generator meta tag and Server HTTP response header to fingerpring a CMS used by a website}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($\)

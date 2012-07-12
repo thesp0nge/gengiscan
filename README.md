@@ -1,24 +1,21 @@
 # Gengiscan
 
-TODO: Write a gem description
+Gengiscan is a CMS fingerprinting tool using Generator meta tag and Seerver HTTP response header to tell the technology behind a CMS serving a target website.
+No intrusive attacks are performed, just a plain GET using Net::HTTP standard ruby library
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-    gem 'gengiscan'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+To install gengiscan gem
 
     $ gem install gengiscan
 
 ## Usage
 
-TODO: Write usage instructions here
+Using gengiscan it's easy:
+
+  require 'gengiscan'
+
+  puts Gengiscan.new.detect("http://www.targetcms.com")[:generator]
 
 ## Contributing
 
