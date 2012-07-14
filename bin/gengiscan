@@ -2,5 +2,5 @@
 require 'gengiscan'
 
 
-puts Gengiscan::Engine.new(ARGV[0]).detect
+puts Gengiscan::Engine.new.detect(ARGV[0])
 
