@@ -9,22 +9,21 @@ module Gengiscan
 
 
 
-    def initialize(url)
-      @uri = URI(url)
-
+    def initialize      
     end
 
-    def detect
-      @res = Net::HTTP.get_response(@uri)
+    def detect(url)
+      uri = URI(url)
+      res = Net::HTTP.get_response(uri)
 
-      {:code=>@res.code, :server=>@res['Server'], :powered=>@res['X-Powered-By'], :generator=>get_generator_signature} 
+      {:code=>res.code, :server=>res['Server'], :powered=>res['X-Powered-By'], :generator=>get_generator_signature(res)} 
     end
 
     private 
-    def get_generator_signature
+    def get_generator_signature(res)
 
       generator = ""
-      doc=Nokogiri::HTML(@res.body)
+      doc=Nokogiri::HTML(res.body)
       doc.xpath("//meta[@name='generator']/@content").each do |value|
         generator = value.value
       end
