@@ -17,7 +17,7 @@ module Gengiscan
     def detect
       @res = Net::HTTP.get_response(@uri)
 
-      {:code=>@res.code, :server=>@res['Server'], :generator=>get_generator_signature} #if res == Net::HTTPOK 
+      {:code=>@res.code, :server=>@res['Server'], :powered=>@res['X-Powered-By'], :generator=>get_generator_signature} 
     end
 
     private 
