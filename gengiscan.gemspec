@@ -14,4 +14,10 @@ Gem::Specification.new do |gem|
   gem.name          = "gengiscan"
   gem.require_paths = ["lib"]
   gem.version       = Gengiscan::VERSION
+
+  gem.add_dependency('nokogiri')
+  gem.add_development_dependency('rake')
+  gem.add_development_dependency('rspec')
+  gem.add_development_dependency('webmock')
+
 end
