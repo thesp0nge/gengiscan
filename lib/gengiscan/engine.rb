@@ -14,14 +14,17 @@ module Gengiscan
 
     def detect(url)
       uri = URI(url)
-      res = Net::HTTP.get_response(uri)
-
-      {:code=>res.code, :server=>res['Server'], :powered=>res['X-Powered-By'], :generator=>get_generator_signature(res)} 
+      begin 
+        res = Net::HTTP.get_response(uri)
+        {:status=>:OK, :code=>res.code, :server=>res['Server'], :powered=>res['X-Powered-By'], :generator=>get_generator_signature(res)} 
+      rescue
+        {:status=>:KO, :code=>nil, :server=>nil, :powered=>nil, :generator=>nil}
+      end
     end
 
     private 
-    def get_generator_signature(res)
 
+    def get_generator_signature(res)
       generator = ""
       doc=Nokogiri::HTML(res.body)
       doc.xpath("//meta[@name='generator']/@content").each do |value|
