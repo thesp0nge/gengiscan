@@ -1,4 +1,5 @@
 require 'net/http'
+require 'net/https'
 require 'nokogiri'
 
 module Gengiscan
@@ -13,11 +14,12 @@ module Gengiscan
     def initialize      
     end
 
-    
+
     def detect(url)
       uri = URI(url)
       begin 
-        res = Net::HTTP.get_response(uri)
+        res = Net::HTTP.get_response(uri) if uri.scheme == "http"
+
         body = check_for_phpinfo(uri)
         {:status=>:OK, :message=> nil, :code=>res.code, :server=>res['Server'], :powered=>res['X-Powered-By'], :generator=>get_generator_signature(res), :php_info=>! body.empty?} 
       rescue => e
