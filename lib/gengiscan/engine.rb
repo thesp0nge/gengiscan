@@ -4,10 +4,7 @@ require 'nokogiri'
 module Gengiscan
   class Engine
 
-
     attr_reader :res
-
-
 
     def initialize      
     end
