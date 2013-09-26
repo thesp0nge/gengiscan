@@ -6,10 +6,12 @@ module Gengiscan
   class Engine
 
     attr_reader :res
+    attr_reader :body
 
     def initialize      
 
     end
+
 
     def detect(url)
       uri = URI(url)
@@ -26,19 +28,14 @@ module Gengiscan
         phpbb[:changelog] = phpbb_changelog_checksum(changelog_html.body) 
         phpbb[:style] = phpbb_theme_cfg_detect(page, url, agent)
 
+        {:status=>:OK, :code=>page.code, :server=>page.header['server'], :powered=>page.header['X-Powered-By'], :generator=>get_generator_signature(page.body), :message=>""} unless is_phpbb?(phpbb)
+        {:status=>:OK, :code=>page.code, :server=>page.header['server'], :powered=>page.header['X-Powered-By'], :generator=>get_generator_signature(page.body), :message=>"", :cms=>"phpbb", :version=>get_phpbb_version(phpbb)} if is_phpbb?(phpbb)
       rescue => e
         
         $logger.err("detect(): #{e.message}")
-        {:status=>:KO, :code=>nil, :server=>nil, :powered=>nil, :generator=>nil, :message=>e.message}
+        {:status=>:KO, :message=>e.message, :code=>nil, :server=>nil, :powered=>nil, :generator=>nil, :php_info=>nil}
 
       end
-
-      $logger.log phpbb
-
-
-      {:status=>:OK, :code=>page.code, :server=>page.header['server'], :powered=>page.header['X-Powered-By'], :generator=>get_generator_signature(page.body), :message=>""} unless is_phpbb?(phpbb)
-      {:status=>:OK, :code=>page.code, :server=>page.header['server'], :powered=>page.header['X-Powered-By'], :generator=>get_generator_signature(page.body), :message=>"", :cms=>"phpbb", :version=>get_phpbb_version(phpbb)} if is_phpbb?(phpbb)
-      
     end
 
     private 
