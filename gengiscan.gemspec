@@ -16,6 +16,8 @@ Gem::Specification.new do |gem|
   gem.version       = Gengiscan::VERSION
 
   gem.add_dependency('nokogiri')
+  gem.add_dependency('mechanize')
+  gem.add_dependency('codesake-commons')
   gem.add_development_dependency('rake')
   gem.add_development_dependency('rspec')
   gem.add_development_dependency('webmock')

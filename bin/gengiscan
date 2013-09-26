@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 require 'gengiscan'
+require 'codesake-commons'
 
+$logger = Codesake::Commons::Logging.instance
 
+$logger.helo("gengiscan v#{Gengiscan::VERSION} is starting up")
 puts Gengiscan::Engine.new.detect(ARGV[0])
 
