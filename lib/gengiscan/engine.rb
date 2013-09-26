@@ -33,7 +33,7 @@ module Gengiscan
       rescue => e
         
         $logger.err("detect(): #{e.message}")
-        {:status=>:KO, :message=>e.message, :code=>nil, :server=>nil, :powered=>nil, :generator=>nil, :php_info=>nil}
+        {:status=>:OK, :code=>page.code, :server=>page.header['server'], :powered=>page.header['X-Powered-By'], :generator=>get_generator_signature(page.body), :message=>e.message}
 
       end
     end
@@ -137,7 +137,7 @@ module Gengiscan
     def phpbb_body_detect(page)
       # 1. detect if we have phpbb_logo.gif
       page.images.each do |img|
-        return {:version=>"unknown", :detected=>true} if ! (img.src =~ logo_phpBB.gif).nil?
+        return {:version=>"unknown", :detected=>true} if ! (img.src =~ /logo_phpBB.gif/).nil?
       end
 
       # 2. check for copyright notice
@@ -145,7 +145,7 @@ module Gengiscan
 
       # 3. check for "Powered by" link
       page.links.each do |link|
-        return {:version=>"unknown", :detected=>true) if link.href == "http://www.phpbb.com" && link.text.downcase.match("powered by")
+        return {:version=>"unknown", :detected=>true} if link.href == "http://www.phpbb.com" && link.text.downcase.match("powered by")
       end
       {:version=>"", :detected=>false}
     end
@@ -153,7 +153,7 @@ module Gengiscan
     def phpbb_theme_cfg_detect(page, url, agent)
 
       page.links.each do |link|
-        theme_name = link.match(/styles\/(\w*)\//)
+        theme_name = link.href.match(/styles\/(\w*)\//) unless link.href.nil?
         unless theme_name.nil?
 
           link = url + "/styles/#{theme_name}/style.cfg"
