@@ -124,6 +124,7 @@ module Gengiscan
         { :md5=>'fbe3fde19e59d20a1c400164e56fe972', :version=>'3.0.12-RC1' },
         { :md5=>'14fefb5e6fc8948aa3ef0aa50ee75571', :version=>'3.0.12-RC2' },
         { :md5=>'a52d4327967adf6b86cd5d18ebd49996', :version=>'3.0.12-RC3' }
+        { :md5=>'6037b58ce1923581fa61941a6aaf815b', :version=>'3.0.12' }
       ]
 
       chksum = Digest::MD5.hexdigest(content)
