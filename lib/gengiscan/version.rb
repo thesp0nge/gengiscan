@@ -1,3 +1,3 @@
 module Gengiscan
-  VERSION = "0.60.1"
+  VERSION = "0.70"
 end
