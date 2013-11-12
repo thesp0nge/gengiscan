@@ -4,6 +4,7 @@ require 'codesake-commons'
 
 $logger = Codesake::Commons::Logging.instance
 
+puts "MIGRATED!!!! USE codesake-gengiscan instead"
 $logger.helo("gengiscan v#{Gengiscan::VERSION} is starting up")
 puts Gengiscan::Engine.new.detect(ARGV[0])
 
